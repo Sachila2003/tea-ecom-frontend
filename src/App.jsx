@@ -1,28 +1,27 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from './context/AuthContext';
+// import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import Login from "./components/Auth/Login";
-import Dashboard from "./pages//Dashboard";
-import Home from "./pages/Home"
+import Register from "./components/Auth/Register";
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+import Navbar from "./components/Layout/Navbar";
+
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Navbar  />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
 export default App;
-

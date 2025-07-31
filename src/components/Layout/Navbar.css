@@ -1,0 +1,73 @@
+/* වෘත්තීය පෙනුමක් සඳහා font එකක් */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* Navbar එකේ ප්‍රධාන container එක */
+.full-width-navbar {
+    background: #0D1117 !important; /* තද කළු background එක */
+    box-shadow: none !important;
+    padding: 1rem 2rem !important; 
+    font-family: 'Inter', sans-serif;
+}
+
+/* අපිට පෙනෙන අළු පාට bar එක (Toolbar) */
+.navbar-toolbar-content {
+    background-color: #30363d !important;
+    border-radius: 10px !important;
+    padding: 10px 30px !important;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* වම් පැත්තේ කොටස (logo, title, links) */
+.nav-group-left {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+/* දකුණු පැත්තේ කොටස (profile, login) */
+.nav-group-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* --- LOGO එකට අදාල CSS එක මෙතන --- */
+/* මේ style එක පස්සෙ logo එක uncomment කරාම වැඩ කරයි */
+.nav-logo-link img {
+    height: 38px; /* Logo එකේ උස */
+    vertical-align: middle; /* අනිත් links එක්ක align වෙන්න */
+    margin-right: -15px; /* Title එකයි logo එකයි අතර gap එක අඩු කරන්න */
+}
+
+/* "Tea E-Com" කියන Title එක */
+.navbar-title {
+    color: #ffffff;
+    font-weight: 600 !important;
+}
+
+/* Navbar එකේ links වලට පොදු style */
+.nav-link {
+    color: #c9d1d9;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent; /* hover animation එකට */
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* link එකක් hover කරනකොට */
+.nav-link:hover {
+    color: #ffffff;
+    border-bottom-color: #58a6ff; /* ලා නිල් පාට ඉරක් එනවා */
+}
+
+/* "Hello" message එක */
+.user-greeting {
+    color: #c9d1d9;
+    font-size: 15px !important;
+    white-space: nowrap;
+}
