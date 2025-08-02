@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { TextField, Button, Box, Typography, InputAdornment } from "@mui/material";
+import { Link as RouterLink } from 'react-router-dom';
 import { FiUser, FiMail, FiLock, FiGift } from 'react-icons/fi';
 
 const Register = () => {
@@ -146,7 +147,7 @@ const Register = () => {
     );
 };
 
-import { Link as RouterLink } from 'react-router-dom';
+
 
 const textFieldStyles = {
     '& .MuiInputBase-root': {
