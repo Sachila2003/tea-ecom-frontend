@@ -1,73 +1,144 @@
-/* වෘත්තීය පෙනුමක් සඳහා font එකක් */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+/* Navbar.css */
 
-/* Navbar එකේ ප්‍රධාන container එක */
-.full-width-navbar {
-    background: #0D1117 !important; /* තද කළු background එක */
-    box-shadow: none !important;
-    padding: 1rem 2rem !important; 
-    font-family: 'Inter', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.site-header {
+    width: 100%;
+    /* උඩ සහ යට padding ටිකක් වැඩි කරා logo එකට ඉඩ දෙන්න */
+    padding: 20px 5%; 
+    background-color: #121212;
+    border-bottom: 1px solid #2a2a2a;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
-/* අපිට පෙනෙන අළු පාට bar එක (Toolbar) */
-.navbar-toolbar-content {
-    background-color: #30363d !important;
-    border-radius: 10px !important;
-    padding: 10px 30px !important;
-    width: 100%;
+.navbar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* වම් පැත්තේ කොටස (logo, title, links) */
-.nav-group-left {
+.navbar-section {
     display: flex;
     align-items: center;
-    gap: 35px;
 }
 
-/* දකුණු පැත්තේ කොටස (profile, login) */
-.nav-group-right {
+/* --- Logo Image Styles (UPDATED) --- */
+.navbar-logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo-image {
+    /* 1. Size එක තවත් වැඩි කළා */
+    height: 60px; /* කලින් 50px තිබ්බේ. ඔයාට ඕන නම් තව වැඩි කරන්න (උදා: 65px) */
+    width: auto;
+    
+    /* 2. Glow effect එක අයින් කළා - සුදු logo එකට මේක අවශ්‍ය නෑ */
+    /* filter: drop-shadow(...);  <-- This line is removed */
+    
+    transition: transform 0.3s ease; /* Hover effect එකට transition */
+}
+
+/* Logo එක hover කරද්දි පොඩ්ඩක් ලොකු වෙනවා */
+.navbar-logo-image:hover {
+    transform: scale(1.05);
+}
+
+/* --- (Rest of the CSS is the same) --- */
+
+/* මැද Links */
+.navbar-center-links {
+    gap: 40px;
+}
+
+.nav-link {
+    color: #c5c5c5 !important;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #00e599;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* දකුණු පැත්ත */
+.navbar-right-actions, .auth-links {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* --- LOGO එකට අදාල CSS එක මෙතන --- */
-/* මේ style එක පස්සෙ logo එක uncomment කරාම වැඩ කරයි */
-.nav-logo-link img {
-    height: 38px; /* Logo එකේ උස */
-    vertical-align: middle; /* අනිත් links එක්ක align වෙන්න */
-    margin-right: -15px; /* Title එකයි logo එකයි අතර gap එක අඩු කරන්න */
+.user-profile-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-/* "Tea E-Com" කියන Title එක */
-.navbar-title {
-    color: #ffffff;
-    font-weight: 600 !important;
-}
-
-/* Navbar එකේ links වලට පොදු style */
-.nav-link {
-    color: #c9d1d9;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    padding-bottom: 4px;
-    border-bottom: 2px solid transparent; /* hover animation එකට */
-    transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-/* link එකක් hover කරනකොට */
-.nav-link:hover {
-    color: #ffffff;
-    border-bottom-color: #58a6ff; /* ලා නිල් පාට ඉරක් එනවා */
-}
-
-/* "Hello" message එක */
 .user-greeting {
-    color: #c9d1d9;
-    font-size: 15px !important;
-    white-space: nowrap;
+    color: #c5c5c5 !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.register-btn {
+    background-color: transparent;
+    border: 2px solid #00e599;
+    color: #00e599 !important;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+    background-color: #00e599;
+    color: #121212 !important;
+}
+.register-btn:hover::after {
+    width: 0;
+}
+
+/* Material UI Menu Styles */
+.custom-menu .MuiPaper-root {
+    background-color: #1e1e1e !important;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.custom-menu-item {
+    color: #c5c5c5 !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 0.95rem !important;
+}
+
+.custom-menu-item:hover {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
 }

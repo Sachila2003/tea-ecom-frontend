@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
-// AuthContext එකෙන් user, loading, signOut ගන්නවා
 import { useAuth } from '../../context/AuthContext';
-import { AppBar, Toolbar, Typography, Box, IconButton, Avatar, Menu, MenuItem } from "@mui/material";
+import { IconButton, Avatar, Menu, MenuItem, Typography } from "@mui/material";
 
-// අපේ අලුත් CSS file එක import කරනවා
 import './Navbar.css'; 
 
-// Logo එකේ import එකත් comment කරනවා, මොකද දැනට logo file එකක් නැති නිසා
-// import logo from '../../assets/logo.png'; 
+import logoImage from '../../assets/images/tea-logo.png'; 
 
 const Navbar = () => {
+    // ... (rest of the component logic remains the same) ...
     const { user, loading, signOut } = useAuth();
     const navigate = useNavigate();
     
@@ -19,7 +17,6 @@ const Navbar = () => {
 
     const handleMenu = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
-
     const handleLogout = () => {
         handleClose();
         signOut();
@@ -27,51 +24,43 @@ const Navbar = () => {
     }
 
     return (
-        <AppBar position="static" className="full-width-navbar">
-            <Toolbar className="navbar-toolbar-content">
-                
-                {/* වම් පැත්ත: Logo (Commented), Title සහ Links */}
-                <Box className="nav-group-left">
-                    
-                    {/* --- LOGO එකට තියෙන කොටස මෙතන --- */}
-                    {/* ඔයාට logo එකක් දාගන්න ඕන වුණාම මේ comment එක අයින් කරන්න */}
-                    {/* 
-                    <Link to="/" className="nav-logo-link">
-                        <img src={logo} alt="Tea E-Com Logo" />
+        <header className="site-header dark-theme"> 
+            <div className="navbar-content">
+                <div className="navbar-section">
+                    <Link to="/" className="navbar-logo-link">
+                        <img src={logoImage} alt="Aura Tea Logo" className="navbar-logo-image" />
                     </Link>
-                    */}
-                    
-                    <Typography variant="h6" className="navbar-title">
-                        Tea E-Com
-                    </Typography>
-                    <Link to="/" className="nav-link">Home</Link>
-                    <Link to="/dashboard" className="nav-link">Dashboard</Link>
-                </Box>
+                </div>
 
-                {/* දකුණු පැත්ත: Login/Register හෝ User Profile */}
-                <Box className="nav-group-right">
+                <div className="navbar-section navbar-center-links">
+                    <Link to="/" className="nav-link">Home</Link>
+                    <Link to="/products" className="nav-link">Products</Link>
+                    <Link to="/about" className="nav-link">About</Link>
+                </div>
+
+                <div className="navbar-section navbar-right-actions">
                     {loading ? null : user ? (
-                        <>
+                        <div className="user-profile-section">
                             <Typography className="user-greeting">Hello, {user.name}</Typography>
-                            <IconButton onClick={handleMenu} sx={{ p: 0 }}>
-                                <Avatar sx={{ bgcolor: '#58a6ff', width: 36, height: 36 }}>
+                            <IconButton onClick={handleMenu} size="small">
+                                <Avatar sx={{ width: 36, height: 36, bgcolor: '#00e599', color: '#121212', fontWeight: 'bold' }}>
                                     {user.name ? user.name[0].toUpperCase() : 'U'}
                                 </Avatar>
                             </IconButton>
-                            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                                <MenuItem onClick={() => { navigate('/dashboard'); handleClose(); }}>Profile</MenuItem>
-                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                            <Menu anchorEl={anchorEl} open={open} onClose={handleClose} classes={{ paper: 'custom-menu' }}>
+                                <MenuItem className="custom-menu-item" onClick={() => { navigate('/dashboard'); handleClose(); }}>Dashboard</MenuItem>
+                                <MenuItem className="custom-menu-item" onClick={handleLogout}>Logout</MenuItem>
                             </Menu>
-                        </>
+                        </div>
                     ) : (
-                        <>
+                        <div className="auth-links">
                             <Link to="/login" className="nav-link">Login</Link>
-                            <Link to="/register" className="nav-link">Register</Link>
-                        </>
+                            <Link to="/register" className="nav-link register-btn">Register</Link>
+                        </div>
                     )}
-                </Box>
-            </Toolbar>
-        </AppBar>
+                </div>
+            </div>
+        </header>
     );
 }
 
