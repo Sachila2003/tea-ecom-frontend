@@ -27,10 +27,21 @@ export const AuthProvider = ({ children }) => {
 
     const signIn = async (credentials) => {
         try {
-            const { token, user } = await login(credentials);
-            localStorage.setItem('token', token);
-            setUser(user);
+            // 1. service එක call කරලා backend එකෙන් data ගන්නවා
+            const response = await login(credentials);
+            
+            // 2. data ටික localStorage එකේ සහ state එකේ save කරනවා
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('user', JSON.stringify(response.user)); // User object එක string කරලා save කරන එක හොඳයි
+            setUser(response.user);
+            
+            // 3. !! වැදගත්ම දේ: සාර්ථක response එක return කරනවා !!
+            // එතකොට Login.jsx එකට මේ data ටික ලැබෙනවා
+            return response; 
+    
         } catch (error) {
+            // Error එකක් ආවොත් විතරක් ඒක re-throw කරනවා
+            console.error("Context signIn error:", error);
             throw error.response.data;
         }
     };
@@ -47,6 +58,7 @@ export const AuthProvider = ({ children }) => {
 
     const signOut = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user'); // <-- මේ line එකත් එකතු කරන්න
         setUser(null);
     };
 

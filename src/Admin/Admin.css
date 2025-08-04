@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.admin-layout {
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    min-height: 100vh;
+}
+
+/* --- Sidebar*/
+.sidebar {
+    width: 260px;
+    background-color: #1e1e1e;
+    border-right: 1px solid #2a2a2a;
+    position: fixed;
+    height: 100%;
+    z-index: 100;
+}
+.sidebar-header {
+    padding: 0 25px;
+    margin-bottom: 30px;
+}
+
+.sidebar-logo {
+    height: 45px;
+    cursor: pointer;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: #a7a7a7;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link svg {
+    margin-right: 15px;
+    font-size: 1.3rem;
+}
+
+.sidebar-link:hover {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+.sidebar-link.active {
+    background-color: rgba(0, 229, 153, 0.1);
+    color: #00e599;
+    border-left-color: #00e599;
+}
+
+.content-wrapper {
+    flex-grow: 1;
+    margin-left: 260px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    height: 70px;
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    flex-shrink: 0;
+}
+
+.visit-site-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #a7a7a7;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.visit-site-link:hover {
+    color: #00e599;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+.stat-card {
+    background-color: #1e1e1e !important;
+    padding: 20px !important;
+    border-radius: 12px !important;
+    border: 1px solid #2a2a2a !important;
+}
+
+.stat-value {
+    color: #00e599 !important;
+    font-weight: 700 !important;
+}
+
+.stat-title {
+    color: #a7a7a7 !important;
+}
+
+.chart-container {
+    background-color: #1e1e1e !important;
+    padding: 30px !important;
+    border-radius: 12px !important;
+    border: 1px solid #2a2a2a !important;
+    margin-top: 30px;
+}

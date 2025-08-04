@@ -1,6 +1,6 @@
 //components tik thiygnn
 import React from "react";
-import { Box, paperClasses, Typography, Grid } from "@mui/material";
+import { Box, Paper, Typography, Grid } from '@mui/material';
 import './Admin.css';
 
 const StatCard = ({ title, value, icon}) => (

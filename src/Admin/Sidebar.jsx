@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { RxDashboard } from "react-icons/rx";
 import { FiPackage, FiUsers, FiSettings } from "react-icons/fi";
 import './Admin.css';
-import logo from '../../src/assets/images/tea-logo';
+import logo from '../assets/images/tea-logo.png';
 
 const Sidebar = () => {
     const navLinks = [

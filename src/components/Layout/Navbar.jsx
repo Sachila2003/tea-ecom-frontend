@@ -1,14 +1,14 @@
+// src/components/Layout/Navbar.jsx (සම්පූර්ණ, නිවැරදි කරන ලද code එක)
+
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '../../context/AuthContext';
 import { IconButton, Avatar, Menu, MenuItem, Typography } from "@mui/material";
 
 import './Navbar.css'; 
-
 import logoImage from '../../assets/images/tea-logo.png'; 
 
 const Navbar = () => {
-    // ... (rest of the component logic remains the same) ...
     const { user, loading, signOut } = useAuth();
     const navigate = useNavigate();
     
@@ -17,11 +17,24 @@ const Navbar = () => {
 
     const handleMenu = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
+    
     const handleLogout = () => {
         handleClose();
         signOut();
         navigate("/login");
-    }
+    };
+
+    // Role එකට අනුව dashboard path එක තීරණය කරන function එක
+    const getDashboardPath = () => {
+        if (!user) return '/';
+        if (user.role === 'admin') {
+            return '/admin/dashboard';
+        } else if (user.role === 'seller') {
+            return '/seller/dashboard';
+        } else {
+            return '/dashboard';
+        }
+    };
 
     return (
         <header className="site-header dark-theme"> 
@@ -48,7 +61,15 @@ const Navbar = () => {
                                 </Avatar>
                             </IconButton>
                             <Menu anchorEl={anchorEl} open={open} onClose={handleClose} classes={{ paper: 'custom-menu' }}>
-                                <MenuItem className="custom-menu-item" onClick={() => { navigate('/dashboard'); handleClose(); }}>Dashboard</MenuItem>
+                                <MenuItem 
+                                    className="custom-menu-item" 
+                                    onClick={() => { 
+                                        navigate(getDashboardPath()); 
+                                        handleClose(); 
+                                    }}
+                                >
+                                    Dashboard
+                                </MenuItem>
                                 <MenuItem className="custom-menu-item" onClick={handleLogout}>Logout</MenuItem>
                             </Menu>
                         </div>
