@@ -21,12 +21,25 @@ const Login = () => {
         e.preventDefault();
         setError('');
         try {
-            await signIn(formData);
-            navigateBasedOnRole(user.role);
-
+            // signIn function eken ena response eka 'response' kiyana variable ekt gnnw
+            const response = await signIn(formData); 
+            
+            if (response && response.user && response.user.role) {
+                const userRole = response.user.role;
+                
+                // Role ekt anuwa dashboard ek navigate krnw
+                if (userRole === 'admin') {
+                    navigate('/admin/dashboard');
+                } else if (userRole === 'seller') {
+                    navigate('/seller/dashboard');
+                } else {
+                    navigate('/dashboard');
+                }
+            } else {
+                setError("Login successful, but user data is missing.");
+            }
         } catch (err) {
-            console.error("Login failed:", err);
-            setError(err.msg || 'Invalid email or password. Please try again.');
+            setError(err.msg || 'Invalid email or password.');
         }
     };
     

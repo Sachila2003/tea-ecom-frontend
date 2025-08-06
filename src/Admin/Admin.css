@@ -111,6 +111,18 @@
 .stat-title {
     color: #a7a7a7 !important;
 }
+.stat-icon-wrapper {
+    background-color: rgba(0, 229, 153, 0.1);
+    color: #00e599;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
 
 .chart-container {
     background-color: #1e1e1e !important;
