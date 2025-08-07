@@ -5,6 +5,7 @@ import DashboardHeader from '../Admin/DashboardHeader';
 import AdminOverview from '../Admin/AdminOverview';
 import UserList from '../Admin/UserList';
 import ProductList from '../Admin/ProductList';
+import Settings from '../Admin/Settings';
 import '../Admin/Admin.css';
 
 const AdminDashboard = () => {
@@ -19,6 +20,7 @@ const AdminDashboard = () => {
                         <Route path="dashboard" element={<AdminOverview />} />
                         <Route path="users" element={<UserList />} />
                         <Route path="products" element={<ProductList />} />
+                        <Route path="settings" element={<Settings />} />
                     </Routes>
                 </main>
             </div>
