@@ -35,6 +35,9 @@ const Settings = () => {
     useEffect(() => {
         if (user) {
             setProfileData({ name: user.name, email: user.email });
+            if (user.profilePic) {
+                setPreview(`http://localhost:5000/${user.profilePic}`);
+            }
         }
 
         const fetchSettings = async () => {
@@ -49,7 +52,7 @@ const Settings = () => {
             }
         };
         fetchSettings();
-    }, [user]);
+    }, []);
 
     const handleProfileChange = (e) => setProfileData({ ...profileData, [e.target.name]: e.target.value });
     const handlePasswordChange = (e) => setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
@@ -96,6 +99,7 @@ const Settings = () => {
             console.log("5. Setting success message...");
             setMessage({ type: 'success', text: 'Profile updated successfully!' });
             console.log("6. Success message set.");
+            setPreview(null);
     
         } catch (error) {
             console.error("--- UPDATE PROFILE FAILED ---");

@@ -1,4 +1,3 @@
-//mek hdgtte dashboard header ekk hdnn
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -7,11 +6,12 @@ import { FiExternalLink } from 'react-icons/fi';
 import './Admin.css';
 
 const DashboardHeader = () => {
-    const { user, signOut } = useAuth();
-    const navigate = useNavigate();
+    const { user, signOut } = useAuth(); 
     
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    
     const handleMenu = (event) => setAnchorEl(event.currentTarget);
     const handleClose = () => setAnchorEl(null);
 
@@ -37,8 +37,11 @@ const DashboardHeader = () => {
                     <>
                         <Typography sx={{ color: '#c5c5c5' }}>Hello, {user.name}</Typography>
                         <IconButton onClick={handleMenu} size="small">
-                            <Avatar sx={{ width: 36, height: 36, bgcolor: '#00e599', color: '#121212' }}>
-                                {user.name ? user.name[0].toUpperCase() : 'U'}
+                            <Avatar 
+                                src={user.profilePic ? `http://localhost:5000/${user.profilePic}` : '/default-avatar.png'}
+                                sx={{ width: 36, height: 36, bgcolor: '#00e599', color: '#121212' }}
+                            >
+                                {user.name ? user.name[0].toUpperCase() : 'A'}
                             </Avatar>
                         </IconButton>
                         <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
