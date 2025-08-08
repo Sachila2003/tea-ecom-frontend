@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
         signIn, 
         signUp, 
         signOut,
-        updateUserContext // <-- අලුත් function එකත් export කරනවා
+        updateUserContext
     };
 
     return (

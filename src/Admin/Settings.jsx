@@ -6,10 +6,8 @@ import {
     InputAdornment, IconButton
 } from '@mui/material';
 
-// react-icons import එකත් තියෙනවද බලන්න
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
-// --- MUI TextField වලට common dark theme styles ---
 const darkThemeTextFieldStyles = {
     '& label.Mui-focused': { color: '#00e599' },
     '& .MuiOutlinedInput-root': {
@@ -22,7 +20,7 @@ const darkThemeTextFieldStyles = {
 };
 
 const Settings = () => {
-    const { user, setUser, loading: authLoading } = useAuth();
+    const { user, loading: authLoading, updateUserContext } = useAuth();
 
     const [profileData, setProfileData] = useState({ name: '', email: '' });
     const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
@@ -67,42 +65,48 @@ const Settings = () => {
     const handleUpdateProfile = async () => {
         setMessage({ text: '' });
         setIsLoading(true);
-        try {
-            // 1. Local Storage එකෙන් Token එක ගන්නවා
-            const token = localStorage.getItem('token');
-            if (!token) {
-                // Token එකක් නැත්නම්, මෙතනින්ම නවත්තනවා
-                setMessage({ type: 'error', text: 'No token found. Please log in again.' });
-                setIsLoading(false);
-                return;
-            }
+        
+        console.log("--- UPDATE PROFILE START ---");
     
-            // 2. FormData object එක හදනවා
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) throw new Error("No token found");
+    
             const formData = new FormData();
             formData.append('name', profileData.name);
             formData.append('email', profileData.email);
             if (profilePic) {
                 formData.append('profilePic', profilePic);
             }
+            
+            console.log("1. Sending data to backend:", { name: profileData.name, email: profileData.email, hasImage: !!profilePic });
     
-            // 3. Request Config එක, Token එකත් එක්ක හදනවා
-            const config = {
-                headers: { 
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${token}` // <-- !! මෙන්න වැදගත්ම දේ !!
-                } 
-            };
+            const config = { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } };
             
-            // 4. PUT request එක, අලුත් config එකත් එක්ක යවනවා
-            const { data } = await axios.put('http://localhost:5000/api/users/profile', formData, config);
+            const response = await axios.put('http://localhost:5000/api/users/profile', formData, config);
             
-            updateUserContext(data); // AuthContext එක update කරනවා
+            console.log("2. Backend responded with:", response.data);
+    
+            // --- Context Update ---
+            console.log("3. Calling updateUserContext...");
+            updateUserContext(response.data);
+            console.log("4. updateUserContext finished.");
+    
+            // --- Message Update ---
+            console.log("5. Setting success message...");
             setMessage({ type: 'success', text: 'Profile updated successfully!' });
+            console.log("6. Success message set.");
     
         } catch (error) {
-            setMessage({ type: 'error', text: error.response?.data?.msg || 'Failed to update profile.' });
+            console.error("--- UPDATE PROFILE FAILED ---");
+            console.error("Caught Error Object:", error);
+            
+            const errorMessage = error.response?.data?.msg || 'Failed to update profile.';
+            console.error("Final Error Message:", errorMessage);
+            setMessage({ type: 'error', text: errorMessage });
         } finally {
             setIsLoading(false);
+            console.log("--- UPDATE PROFILE END ---");
         }
     };
 
